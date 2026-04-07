@@ -1,5 +1,9 @@
 server:
   port: 8082
+  servlet:
+    session:
+      cookie:
+        name: CLIENT2_SESSION
 spring:
   security:
     oauth2:

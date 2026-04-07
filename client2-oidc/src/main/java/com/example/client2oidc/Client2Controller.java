@@ -40,6 +40,11 @@ public class Client2Controller {
         return "index";
     }
 
+    @GetMapping("/unauthorized")
+    public String unauthorized() {
+        return "unauthorized";
+    }
+
     @GetMapping("/api/validate")
     @ResponseBody
     public ResponseEntity<?> validateToken(Authentication authentication, HttpServletResponse response) {

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Unauthorized Access</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f8d7da; padding: 2rem; color: #721c24; text-align: center; }
+        .card { background: white; padding: 3rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
+        h1 { color: #dc3545; }
+        .btn { display: inline-block; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; margin-top: 20px;}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Access Denied</h1>
+        <p>Direct access to Client 2 is strictly forbidden for unauthenticated users.</p>
+        <p>You must authenticate via Client 1 first.</p>
+        <a href="http://localhost:8081" class="btn">Go to Client 1</a>
+    </div>
+</body>
+</html>

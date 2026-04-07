@@ -24,7 +24,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/unauthorized", "/login/**", "/error").permitAll()
                 .anyRequest().authenticated()
+            )
+            .exceptionHandling(exceptions -> exceptions
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.sendRedirect("/unauthorized");
+                })
             )
             .oauth2Login(oauth2 -> oauth2
                 .successHandler(tokenCookieSuccessHandler)
