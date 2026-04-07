@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Client 2 (OIDC)</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f9; padding: 2rem; color: #333; }
+        .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
+        h1 { color: #17a2b8; }
+        .cookie-msg { color: #28a745; font-weight: bold; margin-top: 15px;}
+        .claims { background: #eee; padding: 10px; border-radius: 5px; margin-top: 15px; overflow-wrap: break-word;}
+        .btn { display: inline-block; padding: 10px 20px; background: #007bff; color: white; text-align: center; border-radius: 5px; border: none; cursor: pointer; font-size: 16px; margin-top: 15px; }
+        .btn:hover { background: #0056b3; }
+        #validationMessage { margin-top: 15px; font-weight: bold; padding: 10px; display: none; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .refreshed { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Welcome to Client 2 (OIDC)</h1>
+        <p>Authenticated seamlessly via Keycloak OIDC without typing credentials!</p>
+        <div sec:authorize="isAuthenticated()">
+            <p><strong>Name:</strong> <span th:text="${userName}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${email}"></span></p>
+            
+            <p class="cookie-msg">Check your browser Developer Tools -> Application/Storage -> Cookies to verify that 'access_token' and 'refresh_token' are securely saved!</p>
+
+            <button class="btn" onclick="validateToken()">Validate Token</button>
+            <div id="validationMessage"></div>
+
+            <div class="claims">
+                <strong>OIDC ID Token Claims:</strong>
+                <ul>
+                    <li th:each="claim : ${claims}">
+                        <b th:text="${claim.key}"></b>: <span th:text="${claim.value}"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        function validateToken() {
+            var messageDiv = document.getElementById('validationMessage');
+            messageDiv.style.display = 'none';
+            messageDiv.className = '';
+            
+            fetch('/api/validate')
+                .then(response => response.json())
+                .then(data => {
+                    messageDiv.innerText = data.message;
+                    messageDiv.style.display = 'block';
+                    if (data.message.includes('expired')) {
+                        messageDiv.className = 'refreshed';
+                    } else {
+                        messageDiv.className = 'success';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    messageDiv.innerText = "Error validating token";
+                    messageDiv.style.display = 'block';
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+server:
+  port: 8082
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: client2-oidc
+            client-secret: GzW8o3kHqH48e9a2XU
+            scope: openid, profile, email
+            authorization-grant-type: authorization_code
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/sso-realm
+logging:
+  level:
+    org.springframework.security: DEBUG

@@ -1,0 +1,4 @@
+com\example\client2oidc\SecurityConfig.class
+com\example\client2oidc\Client2OidcApplication.class
+com\example\client2oidc\Client2Controller.class
+com\example\client2oidc\TokenCookieSuccessHandler.class

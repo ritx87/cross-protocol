@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Client 1 (SAML)</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f9; padding: 2rem; color: #333; }
+        .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
+        h1 { color: #0056b3; }
+        .btn { display: inline-block; padding: 10px 20px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; margin-top: 20px;}
+        .attributes { background: #eee; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Welcome to Client 1 (SAML)</h1>
+        <p>Authenticated via Keycloak SAML!</p>
+        <div sec:authorize="isAuthenticated()">
+            <p><strong>Username:</strong> <span th:text="${userName}"></span></p>
+            <div class="attributes">
+                <strong>SAML Attributes:</strong>
+                <ul>
+                    <li th:each="attr : ${attributes}">
+                        <b th:text="${attr.key}"></b>: <span th:text="${attr.value}"></span>
+                    </li>
+                </ul>
+            </div>
+            
+            <a href="http://localhost:8082" target="_blank" class="btn">Open Client 2 (OIDC)</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+{
+  "realm": "sso-realm",
+  "enabled": true,
+  "users": [
+    {
+      "username": "user",
+      "enabled": true,
+      "email": "user@example.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "password",
+          "temporary": false
+        }
+      ]
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "client1-saml",
+      "enabled": true,
+      "protocol": "saml",
+      "redirectUris": [
+        "http://localhost:8081/login/saml2/sso/keycloak"
+      ],
+      "attributes": {
+        "saml.authnstatement": "true",
+        "saml.server.signature": "false",
+        "saml.assertion.signature": "false",
+        "saml.client.signature": "false",
+        "saml.force.post.binding": "true",
+        "saml_name_id_format": "username"
+      }
+    },
+    {
+      "clientId": "client2-oidc",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "redirectUris": [
+        "http://localhost:8082/login/oauth2/code/keycloak"
+      ],
+      "secret": "GzW8o3kHqH48e9a2XU",
+      "publicClient": false,
+      "standardFlowEnabled": true
+    }
+  ]
+}

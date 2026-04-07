@@ -1,0 +1,17 @@
+server:
+  port: 8081
+spring:
+  security:
+    saml2:
+      relyingparty:
+        registration:
+          keycloak:
+            entity-id: client1-saml
+            assertingparty:
+              entity-id: http://localhost:8080/realms/sso-realm
+              metadata-uri: http://localhost:8080/realms/sso-realm/protocol/saml/descriptor
+              singlesignon:
+                sign-request: false
+logging:
+  level:
+    org.springframework.security: DEBUG

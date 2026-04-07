@@ -1,0 +1,3 @@
+com\example\client1saml\Client1SamlApplication.class
+com\example\client1saml\SecurityConfig.class
+com\example\client1saml\Client1Controller.class
