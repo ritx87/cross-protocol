@@ -12,8 +12,8 @@ spring:
           keycloak:
             entity-id: client1-saml
             assertingparty:
-              entity-id: http://localhost:8080/realms/sso-realm
-              metadata-uri: http://localhost:8080/realms/sso-realm/protocol/saml/descriptor
+              entity-id: http://localhost:8080/realms/sso-realm-a
+              metadata-uri: http://localhost:8080/realms/sso-realm-a/protocol/saml/descriptor
               singlesignon:
                 sign-request: false
 logging:

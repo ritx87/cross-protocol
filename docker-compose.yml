@@ -1,6 +1,6 @@
 version: '3'
 services:
-  keycloak:
+  keycloak-a:
     image: quay.io/keycloak/keycloak:24.0.0
     command: start-dev --import-realm
     environment:
@@ -10,4 +10,18 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - ./realm-export.json:/opt/keycloak/data/import/realm-export.json
+      - ./realm-export-a.json:/opt/keycloak/data/import/realm-export-a.json
+
+  keycloak-b:
+    image: quay.io/keycloak/keycloak:24.0.0
+    command: start-dev --import-realm --http-port=8090
+    environment:
+      KC_DB: dev-file
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - 8090:8090
+    volumes:
+      - ./realm-export-b.json:/opt/keycloak/data/import/realm-export-b.json
+    extra_hosts:
+      - "localhost:host-gateway"

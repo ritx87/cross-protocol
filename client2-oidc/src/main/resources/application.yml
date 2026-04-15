@@ -16,7 +16,7 @@ spring:
             authorization-grant-type: authorization_code
         provider:
           keycloak:
-            issuer-uri: http://localhost:8080/realms/sso-realm
+            issuer-uri: http://localhost:8090/realms/sso-realm-b
 logging:
   level:
     org.springframework.security: DEBUG

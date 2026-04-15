@@ -1,0 +1,45 @@
+{
+  "realm": "sso-realm-b",
+  "enabled": true,
+  "clients": [
+    {
+      "clientId": "client2-oidc",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "redirectUris": [
+        "http://localhost:8082/login/oauth2/code/keycloak"
+      ],
+      "secret": "GzW8o3kHqH48e9a2XU",
+      "publicClient": false,
+      "standardFlowEnabled": true
+    }
+  ],
+  "identityProviders": [
+    {
+      "alias": "keycloak-oidc",
+      "displayName": "Keycloak A",
+      "providerId": "keycloak-oidc",
+      "enabled": true,
+      "trustEmail": true,
+      "storeToken": false,
+      "addReadTokenRoleOnCreate": false,
+      "linkOnly": false,
+      "firstBrokerLoginFlowAlias": "first broker login",
+      "config": {
+        "hideOnLoginPage": "false",
+        "clientId": "broker-client",
+        "clientSecret": "broker-secret",
+        "disableUserInfo": "false",
+        "useJwksUrl": "true",
+        "loginHint": "false",
+        "authorizationUrl": "http://localhost:8080/realms/sso-realm-a/protocol/openid-connect/auth",
+        "tokenUrl": "http://localhost:8080/realms/sso-realm-a/protocol/openid-connect/token",
+        "logoutUrl": "http://localhost:8080/realms/sso-realm-a/protocol/openid-connect/logout",
+        "userInfoUrl": "http://localhost:8080/realms/sso-realm-a/protocol/openid-connect/userinfo",
+        "issuer": "http://localhost:8080/realms/sso-realm-a",
+        "syncMode": "IMPORT",
+        "clientAuthMethod": "client_secret_post"
+      }
+    }
+  ]
+}

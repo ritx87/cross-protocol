@@ -1,5 +1,5 @@
 {
-  "realm": "sso-realm",
+  "realm": "sso-realm-a",
   "enabled": true,
   "users": [
     {
@@ -35,13 +35,13 @@
       }
     },
     {
-      "clientId": "client2-oidc",
+      "clientId": "broker-client",
       "enabled": true,
       "protocol": "openid-connect",
       "redirectUris": [
-        "http://localhost:8082/login/oauth2/code/keycloak"
+        "http://localhost:8090/realms/sso-realm-b/broker/keycloak-oidc/endpoint/*"
       ],
-      "secret": "GzW8o3kHqH48e9a2XU",
+      "secret": "broker-secret",
       "publicClient": false,
       "standardFlowEnabled": true
     }

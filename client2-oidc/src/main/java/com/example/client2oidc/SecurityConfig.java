@@ -21,7 +21,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, org.springframework.security.oauth2.client.registration.ClientRegistrationRepository clientRegistrationRepository) throws Exception {
         http
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/unauthorized", "/login/**", "/error").permitAll()
@@ -32,9 +32,16 @@ public class SecurityConfig {
                     response.sendRedirect("/unauthorized");
                 })
             )
-            .oauth2Login(oauth2 -> oauth2
-                .successHandler(tokenCookieSuccessHandler)
-            );
+            .oauth2Login(oauth2 -> {
+                org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver resolver =
+                    new org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver(
+                        clientRegistrationRepository, "/oauth2/authorization");
+                resolver.setAuthorizationRequestCustomizer(customizer -> 
+                    customizer.additionalParameters(params -> params.put("kc_idp_hint", "keycloak-oidc")));
+                
+                oauth2.authorizationEndpoint(auth -> auth.authorizationRequestResolver(resolver))
+                      .successHandler(tokenCookieSuccessHandler);
+            });
         return http.build();
     }
 
