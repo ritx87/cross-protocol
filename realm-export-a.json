@@ -39,7 +39,8 @@
       "enabled": true,
       "protocol": "openid-connect",
       "redirectUris": [
-        "http://localhost:8090/realms/sso-realm-b/broker/keycloak-oidc/endpoint/*"
+        "http://localhost:8090/realms/sso-realm-b/broker/keycloak-oidc/endpoint/*",
+        "http://localhost:8081/oidc-callback"
       ],
       "secret": "broker-secret",
       "publicClient": false,

@@ -19,3 +19,9 @@ spring:
 logging:
   level:
     org.springframework.security: DEBUG
+
+custom:
+  token-exchange:
+    client-id: broker-client
+    client-secret: broker-secret
+    token-url: http://localhost:8080/realms/sso-realm-a/protocol/openid-connect/token

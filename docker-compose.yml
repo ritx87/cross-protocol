@@ -2,7 +2,7 @@ version: '3'
 services:
   keycloak-a:
     image: quay.io/keycloak/keycloak:24.0.0
-    command: start-dev --import-realm
+    command: start-dev --features=token-exchange,admin-fine-grained-authz --import-realm
     environment:
       KC_DB: dev-file
       KEYCLOAK_ADMIN: admin
@@ -14,7 +14,7 @@ services:
 
   keycloak-b:
     image: quay.io/keycloak/keycloak:24.0.0
-    command: start-dev --import-realm --http-port=8090
+    command: start-dev --features=token-exchange,admin-fine-grained-authz --import-realm --http-port=8090
     environment:
       KC_DB: dev-file
       KEYCLOAK_ADMIN: admin
